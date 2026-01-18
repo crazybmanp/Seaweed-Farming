@@ -22,6 +22,17 @@ The core of this mod is the **Cultivated Seaweed Root** (`seaweedfarming:cultiva
     * It will stop if it hits the surface or an obstacle.
 4.  **Harvesting:** Swim out and break the seaweed stalk *above* the root. The root stays behind and begins the growth cycle again automatically.
 
+## ⚙️ Configuration
+
+The mod generates a `SeaweedFarming.json` config file in your `ModConfig` folder upon first launch.
+
+| Option | Default | Description |
+| :--- | :--- | :--- |
+| `MaxHeight` | `10` | Maximum height (in blocks) the cultivated seaweed can grow. |
+| `BaseGrowthHours` | `36.0` | Average in-game hours between growth stages. |
+| `GrowthVariance` | `0.25` | Random variance percentage for growth (0.25 = ±25%). |
+| `TickIntervalMinutes` | `1.0` | How often the server checks for growth (in real-world minutes). |
+
 ## 📦 Installation
 
 1.  Download the latest release (or build from source).

@@ -15,7 +15,7 @@ namespace SeaweedFarming
         public override void Initialize(JsonObject properties)
         {
             base.Initialize(properties);
-            string code = properties["matchCode"].AsString();
+            string? code = properties["matchCode"].AsString();
             if (code != null)
             {
                 matchCode = new AssetLocation(code);
@@ -59,7 +59,7 @@ namespace SeaweedFarming
             base.OnBlockBroken(world, pos, byPlayer, ref handling);
         }
 
-        private bool IsPartOfStack(Block block)
+        private bool IsPartOfStack(Block? block)
         {
             if (block == null || block.Code == null) return false;
             

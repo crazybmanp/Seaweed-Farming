@@ -10,10 +10,6 @@ namespace SeaweedFarming
         private double nextGrowthTotalHours;
         private bool wasGrowthBlocked;
         
-        private const double BaseGrowthHours = 36.0;  // ~1.5 days
-        private const double VariancePercent = 0.25;  // ±25%
-        private const int TickIntervalMs = 180000;     // 3 minutes
-
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
@@ -27,18 +23,21 @@ namespace SeaweedFarming
                     ScheduleNextGrowth();
                 }
 
-                // Register tick listener - checks every 3 minutes
-                RegisterGameTickListener(OnServerTick, TickIntervalMs);
+                // Register tick listener - convert minutes to ms
+                int intervalMs = (int)(SeaweedFarmingModSystem.Config.TickIntervalMinutes * 60 * 1000);
+                RegisterGameTickListener(OnServerTick, intervalMs);
             }
         }
 
         private void OnServerTick(float dt)
         {
             // Check if it's time to grow
+            if (Api?.World?.Calendar == null) return;
+            
             if (Api.World.Calendar.TotalHours >= nextGrowthTotalHours)
             {
                 // Get the block and call its growth logic
-                BlockCultivatedSeaweed block = Block as BlockCultivatedSeaweed;
+                BlockCultivatedSeaweed? block = Block as BlockCultivatedSeaweed;
                 if (block != null)
                 {
                     wasGrowthBlocked = !block.TryGrow(Api.World, Pos);
@@ -51,10 +50,13 @@ namespace SeaweedFarming
 
         private void ScheduleNextGrowth()
         {
+            if (Api?.World?.Rand == null || Api.World.Calendar == null) return;
+
             // Calculate random variance (±25% of base growth time)
-            double variance = BaseGrowthHours * VariancePercent;
+            double baseHours = SeaweedFarmingModSystem.Config.BaseGrowthHours;
+            double variance = baseHours * SeaweedFarmingModSystem.Config.GrowthVariance;
             double randomOffset = (Api.World.Rand.NextDouble() * 2 - 1) * variance;
-            double growthInterval = BaseGrowthHours + randomOffset;
+            double growthInterval = baseHours + randomOffset;
 
             // Set absolute timestamp for when this seaweed should next grow
             nextGrowthTotalHours = Api.World.Calendar.TotalHours + growthInterval;
