@@ -5,7 +5,7 @@
         "height": 2,
         "ingredients": {
             "S": {
-                "type": "item",
+                "type": "block",
                 "code": "game:seaweed-*"
             },
             "C": {

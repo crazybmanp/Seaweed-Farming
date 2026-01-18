@@ -21,6 +21,12 @@
                     "up"
                 ]
             }
+        },
+        {
+            "name": "BreakWholeStack",
+            "properties": {
+                "matchCode": "seaweedfarming:cultivated*"
+            }
         }
     ],
     "guiTransform": {
@@ -63,6 +69,16 @@
     "sideopaque": {
         "all": false
     },
+    "attributes": {},
+    "drops": [
+        {
+            "type": "block",
+            "code": "game:seaweed-section",
+            "quantity": {
+                "avg": 1
+            }
+        }
+    ],
     "collisionbox": null,
     "selectionbox": {
         "x1": 0.1,

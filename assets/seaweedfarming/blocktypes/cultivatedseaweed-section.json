@@ -1,5 +1,6 @@
 {
     "code": "cultivatedseaweed-section",
+    "class": "CultivatedSeaweed",
     "drawtype": "JSONAndWater",
     "renderlayer": "Cutout",
     "renderpass": "liquid",
@@ -11,28 +12,18 @@
     "climateColorMap": "climateWaterTint",
     "doNotRenderAtLod2": true,
     "resistance": 0.5,
+    "behaviors": [
+        {
+            "name": "BreakWholeStack",
+            "properties": {
+                "matchCode": "seaweedfarming:cultivated*"
+            }
+        }
+    ],
     "replaceable": 3000,
     "lightAbsorption": 2,
     "materialDensity": 200,
     "rainPermeable": true,
-    "behaviors": [
-        {
-            "name": "UnstableFalling",
-            "properties": {
-                "attachableFaces": [
-                    "down"
-                ]
-            }
-        },
-        {
-            "name": "CanAttach",
-            "properties": {
-                "sides": [
-                    "up"
-                ]
-            }
-        }
-    ],
     "shape": {
         "base": "game:block/aquatic/plant/seaweed"
     },
@@ -74,13 +65,13 @@
         "hit": "game:block/plant",
         "inside": "game:walk/water"
     },
+    "attributes": {},
     "drops": [
         {
-            "type": "item",
-            "code": "game:seaweed",
+            "type": "block",
+            "code": "game:seaweed-section",
             "quantity": {
-                "avg": 1,
-                "var": 1
+                "avg": 1
             }
         }
     ]

@@ -8,6 +8,7 @@ namespace SeaweedFarming
         {
             api.RegisterBlockClass("CultivatedSeaweed", typeof(BlockCultivatedSeaweed));
             api.RegisterBlockEntityClass("CultivatedSeaweedEntity", typeof(BlockEntityCultivatedSeaweed));
+            api.RegisterBlockBehaviorClass("BreakWholeStack", typeof(BlockBehaviorBreakWholeStack));
         }
     }
 }

@@ -4,6 +4,7 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputPath>bin\$(Configuration)\Mods\SeaweedFarming</OutputPath>
     <VINTAGE_STORY_PATH Condition="'$(VINTAGE_STORY_PATH)' == ''">C:\Users\Crazybmanp\AppData\Roaming\Vintagestory</VINTAGE_STORY_PATH>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +14,14 @@
     </Reference>
     <Reference Include="VintagestoryLib">
       <HintPath>$(VINTAGE_STORY_PATH)\VintagestoryLib.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="VSEssentials">
+      <HintPath>$(VINTAGE_STORY_PATH)\Mods\VSEssentials.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="VSSurvivalMod">
+      <HintPath>$(VINTAGE_STORY_PATH)\Mods\VSSurvivalMod.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>

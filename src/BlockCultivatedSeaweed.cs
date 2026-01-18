@@ -1,16 +1,19 @@
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
 using System;
+using Vintagestory.GameContent;
 
 namespace SeaweedFarming
 {
-    public class BlockCultivatedSeaweed : Block
+    public class BlockCultivatedSeaweed : BlockWaterPlant
     {
         private int maxHeight = 10;         // Config: Max height
         
         // Cache asset locations for performance
         private readonly AssetLocation kelpSectionCode = new AssetLocation("seaweedfarming:cultivatedseaweed-section");
         private readonly AssetLocation kelpTopCode = new AssetLocation("seaweedfarming:cultivatedseaweed-top");
+
+        public override string RemapToLiquidsLayer => "saltwater-still-7";
 
         public override bool TryPlaceBlock(IWorldAccessor world, IPlayer byPlayer, ItemStack itemstack, BlockSelection blockSel, ref string failureCode)
         {
@@ -27,6 +30,26 @@ namespace SeaweedFarming
 
             // Failed to find saltwater
             failureCode = "placesaltwateronly";
+            return false;
+        }
+
+        public override bool CanPlantStay(IBlockAccessor blockAccessor, BlockPos pos)
+        {
+            Block blockBelow = blockAccessor.GetBlock(pos.DownCopy());
+            
+            // If we are the base block (cultivated-seaweed), we rely on default behavior
+            if (Code.Path == "cultivated-seaweed")
+            {
+                return true; 
+            }
+
+            // For Section and Top blocks:
+            if (blockBelow.Code.Equals(new AssetLocation("seaweedfarming:cultivated-seaweed")) || 
+                blockBelow.Code.Equals(kelpSectionCode))
+            {
+                return true;
+            }
+
             return false;
         }
 
