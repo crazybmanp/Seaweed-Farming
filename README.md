@@ -1,26 +1,25 @@
 # Seaweed Farming (Cultivated Seaweed)
 
-A lightweight, performance-focused mod for **Vintage Story** that adds renewable seaweed farming mechanics.
+A lightweight, performance-focused mod for **Vintage Story** that adds renewable, farmable seaweed.
 
 ## 🚀 Features
 
-* **Renewable Seaweed:** Craft a "Cultivated Seaweed Root" to grow your own kelp farms at home.
-* **Performance Focused:** This mod uses an optimized growth system where only your specific cultivated roots are active. The rest of the ocean remains static, ensuring maximum server performance.
-* **Safe for Existing Worlds:** Does not alter terrain generation or biomes. It is strictly a gameplay addition that is safe to add to established saves.
-* **Vanilla Mechanics:** Grows standard vanilla `seaweed-kelp` blocks. Harvested items are fully compatible with *Expanded Foods* (drying, roasting, etc.) and other mods that use vanilla seaweed.
+*   **Cultivated Visuals:** **Cultivated Seaweed** grows in perfectly straight, aligned columns without random offsets. This is intentional, providing a uniform, "farmed" appearance that is distinct from wild seaweed.
+*   **Whole Stack Breaking:** Breaking any part of the seaweed stalk will break the entire column above and below it, simplifying the harvest process.
+*   **Performance Focused:** Utilizes a lightweight BlockEntity. Only the cultivated roots you plant are active, meaning no unnecessary overhead for the rest of the ocean. The tick rate for growth checks is fully configurable.
+*   **Renewable Resource:** Turn a single piece of seaweed into an infinite source of food and crafting material. It requires compost to craft new roots.
+*   **Safe for Existing Worlds:** Does not alter terrain generation or biomes. It is strictly a gameplay addition that is safe to add to established saves.
 
-## 🛠️ Mechanics
+## 🛠️ The Gameplay Loop
 
-### The Cultivated Root
-The core of this mod is the **Cultivated Seaweed Root** (`seaweedfarming:cultivated-seaweed`). This is a custom block that simulates growth logic.
+Farming seaweed is a simple, rewarding cycle:
 
-1.  **Crafting:** Combine **1x Seaweed Section** + **1x Compost** in the crafting grid.
-2.  **Planting:** Place the root underwater (must be submerged).
-3.  **Growth:** The root will randomly tick (targeted **~2.25 in-game days** per block) and grow a stalk of vanilla seaweed upwards.
-    * It respects the visual logic of "Seaweed Tops" vs "Seaweed Sections."
-    * It caps at a height of 10 blocks.
-    * It will stop if it hits the surface or an obstacle.
-4.  **Harvesting:** Swim out and break the seaweed stalk *above* the root. The root stays behind and begins the growth cycle again automatically.
+1.  **Craft:** Combine **1x Seaweed** + **1x Compost** to create a **Cultivated Seaweed Root**.
+2.  **Plant:** Place the root underwater (must be submerged in **Salt Water**).
+3.  **Grow:** Wait for it to grow! It will slowly reach up to the surface (max 10 blocks).
+4.  **Harvest:** Break any part of the plant. The entire column will collapse, dropping vanilla **Seaweed**.
+    *   *Note: Breaking the plant destroys the root.*
+5.  **Repeat:** Use the harvested seaweed to craft more roots (with compost), or use it for food and crafting!
 
 ## ⚙️ Configuration
 
@@ -30,32 +29,31 @@ The mod generates a `SeaweedFarming.json` config file in your `ModConfig` folder
 | :--- | :--- | :--- |
 | `MaxHeight` | `10` | Maximum height (in blocks) the cultivated seaweed can grow. |
 | `BaseGrowthHours` | `36.0` | Average in-game hours between growth stages. |
-| `GrowthVariance` | `0.25` | Random variance percentage for growth (0.25 = ±25%). |
+| `GrowthVariance` | `0.25` | Random variance percentage for growth to keep farms feeling organic (0.25 = ±25%). |
 | `TickIntervalMinutes` | `1.0` | How often the server checks for growth (in real-world minutes). |
 
 ## 📦 Installation
 
 1.  Download the latest release (or build from source).
 2.  Place the `SeaweedFarming.zip` file into your Vintage Story `Mods` folder:
-    * **Windows:** `%appdata%/Vintagestory/Mods`
-    * **Linux:** `~/.config/Vintagestory/Mods`
+    *   **Windows:** `%appdata%/Vintagestory/Mods`
+    *   **Linux:** `~/.config/Vintagestory/Mods`
 3.  Launch the game.
 
 ## 💻 Technical Details (For Developers)
 
-This mod uses a **Custom Block Class** (`BlockCultivatedSeaweed`) acting as a proxy for the growth logic.
+This mod uses a **Custom Block Class** (`BlockCultivatedSeaweed`) paired with a **BlockEntity** (`BlockEntityCultivatedSeaweed`) to handle growth logic.
 
-*   **API Compliance:** Updated for Vintage Story 1.21, utilizing `ShouldReceiveServerGameTicks` and `OnServerGameTick` for optimized server-side performance.
-*   **Dynamic Growth:** The growth probability is calculated at runtime in `OnLoaded` using the world's `SpeedOfTime`, ensuring consistent growth rates regardless of server calendar configuration.
+*   **Scheduled Growth:** Instead of random ticks, each root schedules its next growth time using `RegisterGameTickListener`. This ensures reliable growth rates (~2.25 days avg) without hammering the server with constant random tick checks.
 *   **Safety Checks:**
-    *   **Liquid Integrity:** Growth checks strictly for `LiquidCode == "water"` AND `BlockMaterial == Liquid`.
+    *   **Liquid Integrity:** Growth checks strictly for `LiquidCode == "saltwater"` AND `BlockMaterial == Liquid`.
     *   **Strict Code Matching:** Explicitly verifies vanilla `seaweed-kelp-top` and `seaweed-kelp-section` asset codes before modifying the world.
 
 ## 🏗️ Building from Source
 
 **Requirements:**
-* .NET 8.0 SDK
-* Vintage Story v1.21+
+*   .NET 8.0 SDK
+*   Vintage Story v1.21.6+
 
 **Steps:**
 1.  Clone the repository.
@@ -69,3 +67,5 @@ This mod uses a **Custom Block Class** (`BlockCultivatedSeaweed`) acting as a pr
 ## 📄 License
 
 MIT License - Feel free to include this in modpacks or modify for your own server needs.
+
+**Maintenance Note:** If I am ever unavailable to update this mod, you have my explicit permission to create and publish 'continued' versions. I only ask that you kindly link back to this original version in case I return to the project.
