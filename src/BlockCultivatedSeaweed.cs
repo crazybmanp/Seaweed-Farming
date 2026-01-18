@@ -9,8 +9,8 @@ namespace SeaweedFarming
         private int maxHeight = 10;         // Config: Max height
         
         // Cache asset locations for performance
-        private readonly AssetLocation kelpSectionCode = new AssetLocation("game:seaweed-section");
-        private readonly AssetLocation kelpTopCode = new AssetLocation("game:seaweed-top");
+        private readonly AssetLocation kelpSectionCode = new AssetLocation("seaweedfarming:cultivatedseaweed-section");
+        private readonly AssetLocation kelpTopCode = new AssetLocation("seaweedfarming:cultivatedseaweed-top");
 
         public override bool TryPlaceBlock(IWorldAccessor world, IPlayer byPlayer, ItemStack itemstack, BlockSelection blockSel, ref string failureCode)
         {
@@ -30,7 +30,7 @@ namespace SeaweedFarming
             return false;
         }
 
-        public void TryGrow(IWorldAccessor world, BlockPos pos)
+        public bool TryGrow(IWorldAccessor world, BlockPos pos)
         {
             IBlockAccessor blockAccessor = world.BlockAccessor;
 
@@ -52,18 +52,21 @@ namespace SeaweedFarming
                 }
 
                 // Stop if blocked by a non-saltwater solid
-                if (solidBlock.Id != 0 && solidBlock.LiquidCode != "saltwater") return;
+                if (solidBlock.Id != 0 && solidBlock.LiquidCode != "saltwater") return false;
 
                 // If we found saltwater, grow here
                 if (solidBlock.LiquidCode == "saltwater" || fluidBlock.LiquidCode == "saltwater")
                 {
                     GrowSeaweed(world, checkPos, blockAccessor);
-                    return;
+                    return true;
                 }
                 
                 // No saltwater found (air or fresh water) - stop growing
-                return;
+                return false;
             }
+            
+            // Reached max height
+            return false;
         }
 
         private void GrowSeaweed(IWorldAccessor world, BlockPos targetPos, IBlockAccessor blockAccessor)
@@ -77,7 +80,7 @@ namespace SeaweedFarming
             BlockPos belowPos = targetPos.DownCopy();
             Block belowBlock = blockAccessor.GetBlock(belowPos);
 
-            if (belowBlock.Code.Path.Equals("seaweed-top"))
+            if (belowBlock.Code.Equals(kelpTopCode))
             {
                 blockAccessor.SetBlock(sectionBlock.Id, belowPos);
             }

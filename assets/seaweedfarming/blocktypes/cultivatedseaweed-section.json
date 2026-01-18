@@ -1,0 +1,87 @@
+{
+    "code": "cultivatedseaweed-section",
+    "drawtype": "JSONAndWater",
+    "renderlayer": "Cutout",
+    "renderpass": "liquid",
+    "blockmaterial": "liquid",
+    "faceCullMode": "liquid",
+    "vertexFlags": {
+        "windMode": "WaterPlant"
+    },
+    "climateColorMap": "climateWaterTint",
+    "doNotRenderAtLod2": true,
+    "resistance": 0.5,
+    "replaceable": 3000,
+    "lightAbsorption": 2,
+    "materialDensity": 200,
+    "rainPermeable": true,
+    "behaviors": [
+        {
+            "name": "UnstableFalling",
+            "properties": {
+                "attachableFaces": [
+                    "down"
+                ]
+            }
+        },
+        {
+            "name": "CanAttach",
+            "properties": {
+                "sides": [
+                    "up"
+                ]
+            }
+        }
+    ],
+    "shape": {
+        "base": "game:block/aquatic/plant/seaweed"
+    },
+    "textures": {
+        "weed": {
+            "base": "game:block/plant/aquatic/seaweed/section1"
+        }
+    },
+    "sidesolid": {
+        "all": false
+    },
+    "sideopaque": {
+        "all": false
+    },
+    "collisionbox": null,
+    "selectionbox": {
+        "x1": 0,
+        "y1": 0,
+        "z1": 0,
+        "x2": 1,
+        "y2": 1,
+        "z2": 1
+    },
+    "guiTransform": {
+        "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "origin": {
+            "x": 0.5,
+            "y": 0.68,
+            "z": 0.5
+        }
+    },
+    "sounds": {
+        "place": "game:block/plant",
+        "break": "game:block/plant",
+        "hit": "game:block/plant",
+        "inside": "game:walk/water"
+    },
+    "drops": [
+        {
+            "type": "item",
+            "code": "game:seaweed",
+            "quantity": {
+                "avg": 1,
+                "var": 1
+            }
+        }
+    ]
+}

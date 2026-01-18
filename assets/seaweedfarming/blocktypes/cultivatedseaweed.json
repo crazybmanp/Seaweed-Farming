@@ -13,6 +13,16 @@
     "climateColorMap": "climateWaterTint",
     "randomDrawChance": 5,
     "resistance": 0.5,
+    "behaviors": [
+        {
+            "name": "CanAttach",
+            "properties": {
+                "sides": [
+                    "up"
+                ]
+            }
+        }
+    ],
     "guiTransform": {
         "rotation": {
             "x": 0,

@@ -8,6 +8,7 @@ namespace SeaweedFarming
     public class BlockEntityCultivatedSeaweed : BlockEntity
     {
         private double nextGrowthTotalHours;
+        private bool wasGrowthBlocked;
         
         private const double BaseGrowthHours = 36.0;  // ~1.5 days
         private const double VariancePercent = 0.25;  // ±25%
@@ -40,7 +41,7 @@ namespace SeaweedFarming
                 BlockCultivatedSeaweed block = Block as BlockCultivatedSeaweed;
                 if (block != null)
                 {
-                    block.TryGrow(Api.World, Pos);
+                    wasGrowthBlocked = !block.TryGrow(Api.World, Pos);
                     // Schedule the next growth
                     ScheduleNextGrowth();
                     MarkDirty();
@@ -76,6 +77,11 @@ namespace SeaweedFarming
                 {
                     dsc.AppendLine("Ready to grow");
                 }
+            }
+            
+            if (wasGrowthBlocked)
+            {
+                dsc.AppendLine("Last growth attempt: Blocked");
             }
         }
 
