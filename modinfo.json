@@ -1,0 +1,13 @@
+{
+    "type": "code",
+    "modid": "seaweedfarming",
+    "name": "Seaweed Farming",
+    "authors": [
+        "Crazybmanp"
+    ],
+    "description": "Adds a cultivated seaweed root that grows vanilla seaweed.",
+    "version": "1.0.0",
+    "dependencies": {
+        "game": "1.21.6"
+    }
+}

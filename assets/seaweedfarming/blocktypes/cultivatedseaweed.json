@@ -1,0 +1,65 @@
+{
+    "code": "cultivated-seaweed",
+    "class": "CultivatedSeaweed",
+    "entityClass": "CultivatedSeaweedEntity",
+    "drawtype": "JSONAndWater",
+    "renderlayer": "Cutout",
+    "renderpass": "liquid",
+    "blockmaterial": "Plant",
+    "faceCullMode": "liquid",
+    "vertexFlags": {
+        "windMode": "WaterPlant"
+    },
+    "climateColorMap": "climateWaterTint",
+    "randomDrawChance": 5,
+    "resistance": 0.5,
+    "guiTransform": {
+        "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "origin": {
+            "x": 0.5,
+            "y": 0.68,
+            "z": 0.5
+        }
+    },
+    "sounds": {
+        "place": "game:block/plant",
+        "break": "game:block/plant",
+        "hit": "game:block/plant",
+        "inside": "game:walk/water"
+    },
+    "shape": {
+        "base": "game:block/aquatic/plant/seaweed"
+    },
+    "textures": {
+        "weed": {
+            "base": "game:block/plant/aquatic/seaweed/section1"
+        }
+    },
+    "creativeinventory": {
+        "general": [
+            "*"
+        ],
+        "flora": [
+            "*"
+        ]
+    },
+    "sidesolid": {
+        "all": false
+    },
+    "sideopaque": {
+        "all": false
+    },
+    "collisionbox": null,
+    "selectionbox": {
+        "x1": 0.1,
+        "y1": 0,
+        "z1": 0.1,
+        "x2": 0.9,
+        "y2": 1,
+        "z2": 0.9
+    }
+}

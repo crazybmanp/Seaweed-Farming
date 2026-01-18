@@ -1,0 +1,22 @@
+[
+    {
+        "ingredientPattern": "C,S",
+        "width": 1,
+        "height": 2,
+        "ingredients": {
+            "S": {
+                "type": "item",
+                "code": "game:seaweed-*"
+            },
+            "C": {
+                "type": "item",
+                "code": "game:compost"
+            }
+        },
+        "output": {
+            "type": "block",
+            "code": "seaweedfarming:cultivated-seaweed",
+            "quantity": 1
+        }
+    }
+]

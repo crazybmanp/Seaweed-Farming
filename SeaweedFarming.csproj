@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <OutputPath>bin\$(Configuration)\Mods\SeaweedFarming</OutputPath>
+    <VINTAGE_STORY_PATH Condition="'$(VINTAGE_STORY_PATH)' == ''">C:\Users\Crazybmanp\AppData\Roaming\Vintagestory</VINTAGE_STORY_PATH>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="VintagestoryAPI">
+      <HintPath>$(VINTAGE_STORY_PATH)\VintagestoryAPI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="VintagestoryLib">
+      <HintPath>$(VINTAGE_STORY_PATH)\VintagestoryLib.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="modinfo.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="assets\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <PropertyGroup>
+      <ModZipName>SeaweedFarming.zip</ModZipName>
+    </PropertyGroup>
+    <Exec Command="powershell -Command &quot;Compress-Archive -Path '$(OutputPath)*' -DestinationPath '$(ProjectDir)$(ModZipName)' -Force&quot;" />
+  </Target>
+</Project>
