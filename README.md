@@ -46,10 +46,10 @@ The mod generates a `SeaweedFarming.json` config file in your `ModConfig` folder
 
 This mod uses a **Custom Block Class** (`BlockCultivatedSeaweed`) paired with a **BlockEntity** (`BlockEntityCultivatedSeaweed`) to handle growth logic.
 
-* **Scheduled Growth:** Instead of random ticks, each root schedules its next growth time using `RegisterGameTickListener`. This ensures reliable growth rates (~2.25 days avg) without hammering the server with constant random tick checks.
+* **Scheduled Growth:** The BlockEntity polls via a tick listener to provide efficient growth timing. Randomness is calculated **at the start** of each growth cycle to set a specific target time, ensuring predictable performance and average growth rates (~1.5 days ± 25%).
 * **Safety Checks:**
     * **Liquid Integrity:** Growth checks strictly for `LiquidCode == "saltwater"` AND `BlockMaterial == Liquid`.
-    * **Strict Code Matching:** Explicitly verifies vanilla `seaweed-kelp-top` and `seaweed-kelp-section` asset codes before modifying the world.
+    * **Custom Block Assets:** Uses custom `cultivatedseaweed` blocks primarily to enable the **BreakWholeStack** behavior (ensuring easy harvesting) and to provide uniform alignment.
 
 ## 🏗️ Building from Source
 
