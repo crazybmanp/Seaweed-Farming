@@ -3,7 +3,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <OutputPath>bin\$(Configuration)\Mods\SeaweedFarming</OutputPath>
-    <VINTAGE_STORY_PATH Condition="'$(VINTAGE_STORY_PATH)' == ''">C:\Users\Crazybmanp\AppData\Roaming\Vintagestory</VINTAGE_STORY_PATH>
+    <VINTAGE_STORY_PATH Condition="'$(VINTAGE_STORY_PATH)' == ''">$(AppData)\Vintagestory</VINTAGE_STORY_PATH>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
