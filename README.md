@@ -2,13 +2,15 @@
 
 A lightweight, performance-focused mod for **Vintage Story** that adds renewable, farmable seaweed.
 
+I originally built this to help with the sushi recipes in [Expanded Foods](https://mods.vintagestory.at/expandedfoods), creating a simple way to keep the kitchen stocked without needing to constantly forage the ocean floor.
+
 ## 🚀 Features
 
-*   **Cultivated Visuals:** **Cultivated Seaweed** grows in perfectly straight, aligned columns without random offsets. This is intentional, providing a uniform, "farmed" appearance that is distinct from wild seaweed.
-*   **Whole Stack Breaking:** Breaking any part of the seaweed stalk will break the entire column above and below it, simplifying the harvest process.
-*   **Performance Focused:** Utilizes a lightweight BlockEntity. Only the cultivated roots you plant are active, meaning no unnecessary overhead for the rest of the ocean. The tick rate for growth checks is fully configurable.
-*   **Renewable Resource:** Turn a single piece of seaweed into an infinite source of food and crafting material. It requires compost to craft new roots.
-*   **Safe for Existing Worlds:** Does not alter terrain generation or biomes. It is strictly a gameplay addition that is safe to add to established saves.
+* **Cultivated Visuals:** **Cultivated Seaweed** grows in perfectly straight, aligned columns without random offsets. This is intentional, providing a uniform, "farmed" appearance that is distinct from wild seaweed.
+* **Whole Stack Breaking:** Breaking any part of the seaweed stalk will break the entire column above and below it, simplifying the harvest process.
+* **Performance Focused:** Utilizes a lightweight BlockEntity. Only the cultivated roots you plant are active, meaning no unnecessary overhead for the rest of the ocean. The tick rate for growth checks is fully configurable.
+* **Renewable Resource:** Turn a single piece of seaweed into an infinite source of food and crafting material. It requires compost to craft new roots.
+* **Safe for Existing Worlds:** Does not alter terrain generation or biomes. It is strictly a gameplay addition that is safe to add to established saves.
 
 ## 🛠️ The Gameplay Loop
 
@@ -18,7 +20,7 @@ Farming seaweed is a simple, rewarding cycle:
 2.  **Plant:** Place the root underwater (must be submerged in **Salt Water**).
 3.  **Grow:** Wait for it to grow! It will slowly reach up to the surface (max 10 blocks).
 4.  **Harvest:** Break any part of the plant. The entire column will collapse, dropping vanilla **Seaweed**.
-    *   *Note: Breaking the plant destroys the root.*
+    * *Note: Breaking the plant destroys the root.*
 5.  **Repeat:** Use the harvested seaweed to craft more roots (with compost), or use it for food and crafting!
 
 ## ⚙️ Configuration
@@ -36,24 +38,24 @@ The mod generates a `SeaweedFarming.json` config file in your `ModConfig` folder
 
 1.  Download the latest release (or build from source).
 2.  Place the `SeaweedFarming.zip` file into your Vintage Story `Mods` folder:
-    *   **Windows:** `%appdata%/Vintagestory/Mods`
-    *   **Linux:** `~/.config/Vintagestory/Mods`
+    * **Windows:** `%appdata%/Vintagestory/Mods`
+    * **Linux:** `~/.config/Vintagestory/Mods`
 3.  Launch the game.
 
 ## 💻 Technical Details (For Developers)
 
 This mod uses a **Custom Block Class** (`BlockCultivatedSeaweed`) paired with a **BlockEntity** (`BlockEntityCultivatedSeaweed`) to handle growth logic.
 
-*   **Scheduled Growth:** Instead of random ticks, each root schedules its next growth time using `RegisterGameTickListener`. This ensures reliable growth rates (~2.25 days avg) without hammering the server with constant random tick checks.
-*   **Safety Checks:**
-    *   **Liquid Integrity:** Growth checks strictly for `LiquidCode == "saltwater"` AND `BlockMaterial == Liquid`.
-    *   **Strict Code Matching:** Explicitly verifies vanilla `seaweed-kelp-top` and `seaweed-kelp-section` asset codes before modifying the world.
+* **Scheduled Growth:** Instead of random ticks, each root schedules its next growth time using `RegisterGameTickListener`. This ensures reliable growth rates (~2.25 days avg) without hammering the server with constant random tick checks.
+* **Safety Checks:**
+    * **Liquid Integrity:** Growth checks strictly for `LiquidCode == "saltwater"` AND `BlockMaterial == Liquid`.
+    * **Strict Code Matching:** Explicitly verifies vanilla `seaweed-kelp-top` and `seaweed-kelp-section` asset codes before modifying the world.
 
 ## 🏗️ Building from Source
 
 **Requirements:**
-*   .NET 8.0 SDK
-*   Vintage Story v1.21.6+
+* .NET 8.0 SDK
+* Vintage Story v1.21.6+
 
 **Steps:**
 1.  Clone the repository.
